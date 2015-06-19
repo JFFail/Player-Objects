@@ -23,3 +23,20 @@ var someone = new Person("Garrett", 5);
 //Add my rapport for Garrett.
 me.addRapport(someone, 1.25);
 console.log("My rapport toward " + someone.name + " is " + me.rapportList[someone] + ".");
+
+//Set my nobility.
+me.calcNobility();
+console.log("My nobility count is: " + me.nobilityCount);
+console.log("My nobility is: " + me.nobility);
+me.calcNobility();
+console.log("After another bump, my nobility is: " + me.nobility);
+
+//Set my infamy.
+me.calcInfamy();
+me.calcInfamy();
+me.calcInfamy();
+console.log("My infamy count is: " + me.infamyCount);
+console.log("My infamy value is: " + me.infamy);
+
+//See what the renown is.
+console.log("My renown is: " + me.renown);
