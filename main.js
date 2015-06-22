@@ -40,3 +40,11 @@ console.log("My infamy value is: " + me.infamy);
 
 //See what the renown is.
 console.log("My renown is: " + me.renown);
+
+me.calcInfamy();
+me.calcNobility();
+me.calcNobility();
+
+//Log it again.
+console.log("Bumped infamy once for a 4 streak and then nobility twice...");
+console.log("My renown is now: " + me.renown);

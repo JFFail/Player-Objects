@@ -71,6 +71,10 @@ module.exports = function Player(name, renown) {
     };
     
     this.modifyWithStreak = function() {
-      this.nobility = this.nobility + (this.nobility * (this.streakCount * 0.1));  
+      if(this.streakCount > 0) {
+          this.nobility = this.nobility + (this.nobility * (this.streakCount * 0.05));
+      } else {
+          this.infamy = this.infamy +  (this.infamy * (this.streakCount * 0.05));
+      }
     };
 };
