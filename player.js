@@ -6,11 +6,21 @@ module.exports = function Player(name, renown) {
     this.nobilityCount = 0;
     this.infamy = 1;
     this.infamyCount = 0;
+    //Streak will be positive for noble deeds and negative for infamous ones.
+    this.streakCount = 0;
     
     //Function to determine current nobility.
     this.calcNobility = function() {
       //First increment my nobility counter.
       this.nobilityCount++;
+      
+      //See what the current streak is.
+      if(this.streakCount > 0) {
+          this.streakCount++;
+      } else {
+          //Reset it to 1 since they've done a good deed.
+          this.streakCount = 1;
+      }
       
       //Recalculate nobility. It scales the more noble you are.
       if(this.nobility < 15) {
@@ -21,6 +31,9 @@ module.exports = function Player(name, renown) {
           this.nobility = this.nobility + (.5 * this.nobilityCount);
       }
       
+      //To start the streak impacts outside the formula.
+      this.modifyWithStreak();
+      
       //Recalculate the new renown.
       this.calcRenown();
     };
@@ -29,6 +42,13 @@ module.exports = function Player(name, renown) {
     this.calcInfamy = function() {
       //First increment my infamy counter.
       this.infamyCount++;
+      
+      //See what the current streak is.
+      if(this.streakCount < 0) {
+          this.streakCount--;
+      } else {
+          this.streakCount = -1;
+      }
       
       //Recalculate infamy. It scales the more infamous you are.
       if(this.infamy < 15) {
@@ -39,6 +59,8 @@ module.exports = function Player(name, renown) {
           this.infamy = this.infamy + (.5 * this.infamyCount);
       }
       
+      this.modifyWithStreak();
+      
       //Recalculate renown.
       this.calcRenown();
     };
@@ -46,5 +68,9 @@ module.exports = function Player(name, renown) {
     //Calculate renown based on current infamy/nobility values.
     this.calcRenown = function() {
       this.renown = (this.nobility * this.nobilityCount) - (this.infamy * this.infamyCount);  
+    };
+    
+    this.modifyWithStreak = function() {
+      this.nobility = this.nobility + (this.nobility * (this.streakCount * 0.1));  
     };
 };
