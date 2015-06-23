@@ -26,25 +26,16 @@ console.log("My rapport toward " + someone.name + " is " + me.rapportList[someon
 
 //Set my nobility.
 me.calcNobility();
-console.log("My nobility count is: " + me.nobilityCount);
 console.log("My nobility is: " + me.nobility);
+console.log("My renown is: " + me.renown);
 me.calcNobility();
 console.log("After another bump, my nobility is: " + me.nobility);
+console.log("And my renown is: " + me.renown);
 
 //Set my infamy.
 me.calcInfamy();
-me.calcInfamy();
-me.calcInfamy();
-console.log("My infamy count is: " + me.infamyCount);
 console.log("My infamy value is: " + me.infamy);
-
-//See what the renown is.
-console.log("My renown is: " + me.renown);
-
+console.log("And my renown is: " + me.renown);
 me.calcInfamy();
-me.calcNobility();
-me.calcNobility();
-
-//Log it again.
-console.log("Bumped infamy once for a 4 streak and then nobility twice...");
-console.log("My renown is now: " + me.renown);
+console.log("My infamy value is: " + me.infamy);
+console.log("And my renown is: " + me.renown);

@@ -31,7 +31,7 @@ module.exports = function Player(name, renown) {
           this.nobility = this.nobility + (.5 * this.nobilityCount);
       }
       
-      //To start the streak impacts outside the formula.
+      //Impact of the streak is outside the formula.
       this.modifyWithStreak();
       
       //Recalculate the new renown.
@@ -59,6 +59,7 @@ module.exports = function Player(name, renown) {
           this.infamy = this.infamy + (.5 * this.infamyCount);
       }
       
+      //Impact of the streak is outside the formula.
       this.modifyWithStreak();
       
       //Recalculate renown.
@@ -67,14 +68,19 @@ module.exports = function Player(name, renown) {
     
     //Calculate renown based on current infamy/nobility values.
     this.calcRenown = function() {
-      this.renown = (this.nobility * this.nobilityCount) - (this.infamy * this.infamyCount);  
+      //this.renown = (this.nobility * this.nobilityCount) - (this.infamy * this.infamyCount);
+      //Removed count modifiers since they were leveraged twice, messing up scaling.
+      this.renown = this.nobility - this.infamy;
     };
     
+    //Modify the current nobility or infamy value based on the current streak.
     this.modifyWithStreak = function() {
+      //Streak is for noble deeds if positive.
       if(this.streakCount > 0) {
           this.nobility = this.nobility + (this.nobility * (this.streakCount * 0.05));
+      //Otherwise it's for infamous deeds.
       } else {
-          this.infamy = this.infamy +  (this.infamy * (this.streakCount * 0.05));
+          this.infamy = this.infamy - (this.infamy * (this.streakCount * 0.05));
       }
     };
 };
